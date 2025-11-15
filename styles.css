@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+#messages {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+input {
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+}
+
+input:focus {
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 0px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    text-align: left;
+    border-bottom: 2px solid #000;
+    padding: 0.5rem 0;
+}
+
+tbody td {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.time {
+    width: 5rem;
+}
+
+.track {
+    text-align: right;
+    width: 4rem;
+}
+
+.alert {
+    color: #c00;
+    font-weight: 600;
+}

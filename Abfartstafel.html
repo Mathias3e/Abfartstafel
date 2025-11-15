@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abfahrtstafel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="abfahrt.png" sizes="32x32">
+</head>
+
+<body>
+    <header>
+        <h1>Abfahrtstafel</h1>
+        <div id="search">
+            <input type="text" id="station" placeholder="Kriens Mattenhof">
+            <button id="search-btn">Nächste Fahrten suchen →</button>
+            <button id="set-default-btn">Als Standard setzen →</button>
+        </div>
+    </header>
+    <main>
+        <h2 id="station-name"></h2>
+        <div id="messages">
+            <h3>Abfahrt</h3>
+            <h5>Départ - Partenza - Departure</h5>
+        </div>
+        <table id="abfahrtstafel">
+            <thead>
+                <tr>
+                    <th>Zeit</th>
+                    <th>Linie</th>
+                    <th>Richtung</th>
+                    <th>Gleis / Kante</th>
+                </tr>
+            </thead>
+            <tbody id="departures-body">
+                <!-- Dynamisch generierte Abfahrten werden hier eingefügt -->
+            </tbody>
+        </table>
+    </main>
+</body>
+<script src="logic.js"></script>
+</html>
