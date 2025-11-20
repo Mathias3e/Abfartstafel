@@ -34,7 +34,7 @@ const hhmm = s => s.slice(11, 16);
 function loadConections() {
     const abfahrtstafel = document.getElementById("departures-body");
     abfahrtstafel.innerHTML = "";
-    for (let i = 0; i < nVerbindungen; i++) {
+    for (let i = 0; i < Math.min(nVerbindungen, 20); i++) {
         const row = document.createElement("tr");
         const time = document.createElement("td");
         time.setAttribute("class", "time");

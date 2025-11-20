@@ -59,3 +59,11 @@ tbody td {
     color: #c00;
     font-weight: 600;
 }
+
+sbb-clock {
+    height: 113px;
+    aspect-ratio: 1/1;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

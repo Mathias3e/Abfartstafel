@@ -7,6 +7,7 @@
     <title>Abfahrtstafel</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="abfahrt.png" sizes="32x32">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sbb-esta/lyne-elements/core.css">
 </head>
 
 <body>
@@ -16,6 +17,7 @@
             <input type="text" id="station" placeholder="Kriens Mattenhof">
             <button id="search-btn">Nächste Fahrten suchen →</button>
             <button id="set-default-btn">Als Standard setzen →</button>
+            <sbb-clock></sbb-clock>
         </div>
     </header>
     <main>
@@ -38,6 +40,10 @@
             </tbody>
         </table>
     </main>
+    <script type="module">
+        import 'https://esm.sh/@sbb-esta/lyne-elements@latest/clock.js';
+    </script>
 </body>
 <script src="logic.js"></script>
+
 </html>
