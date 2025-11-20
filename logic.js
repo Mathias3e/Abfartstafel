@@ -39,7 +39,9 @@ function loadConections() {
         const time = document.createElement("td");
         time.setAttribute("class", "time");
         const number = document.createElement("td");
+        number.setAttribute("class", "number");
         const destination = document.createElement("td");
+        destination.setAttribute("class", "destination");
         const platform = document.createElement("td");
         platform.setAttribute("class", "track");
 
