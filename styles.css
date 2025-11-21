@@ -79,7 +79,7 @@ sbb-clock {
     top: 20px;
     right: 20px;
     border: 3px solid black;
-    border-radius: 113px;
+    border-radius: 50%;
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
@@ -114,9 +114,15 @@ sbb-clock {
         table-layout: fixed
     }
 
-    .destination, th:last-child {
+    .destination,
+    th:last-child {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .destination:hover {
+        overflow-x: auto;
+        text-overflow: clip;
     }
 }
