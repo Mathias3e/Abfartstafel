@@ -35,7 +35,10 @@ const hhmm = s => s.slice(11, 16);
 function loadConections() {
     const abfahrtstafel = document.getElementById("departures-body");
     abfahrtstafel.innerHTML = "";
-    for (let i = 0; i < Math.min(nVerbindungen, 20); i++) {
+
+    const limit = Math.min(data.stationboard.length, nVerbindungen);
+
+    for (let i = 0; i < limit; i++) {
         const row = document.createElement("tr");
         const time = document.createElement("td");
         time.setAttribute("class", "time");
@@ -87,21 +90,35 @@ async function refrechAbfahrtenFromGeolocation() {
     loadConections();
 }
 
-async function getNearbyStations() {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        const url = `https://transport.opendata.ch/v1/locations?x=${lat}&y=${lon}&type=station`;
-        let response = await fetch(url);
-        const json = await response.json();
-
-        if (json.station != null) {
-            station = json.stations[0].name;
-        } else {
-            alert("Keine Station in der Nähe gefunden");
+function getNearbyStations() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            alert("Geolocation nicht verfügbar");
+            reject("No Geolocation");
+            return;
         }
-    }, (err) => {
-        console.error("Geolocation error:", err.message);
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            console.log("Latitude:", lat, "Longitude:", lon);
+
+            const url = `https://transport.opendata.ch/v1/locations?x=${lat}&y=${lon}`;
+            let response = await fetch(url);
+            const json = await response.json();
+
+            if (json.stations && json.stations.length > 0) {
+                station = json.stations[1].name;
+                document.getElementById("station").value = station;
+                resolve();
+            } else {
+                alert("Keine Station in der Nähe gefunden");
+                reject("No stations");
+            }
+        }, (err) => {
+            console.error("Geolocation error:", err.message);
+            reject(err);
+        });
     });
 }
