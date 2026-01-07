@@ -7,8 +7,9 @@ let station;
 function initialize() {
     station = JSON.parse(localStorage.getItem("defaultStation")) || "Kriens Mattenhof";
     document.getElementById("station").placeholder = station;
-    
+
     document.getElementById("search-btn").addEventListener("click", refrechAbfahrten);
+    document.getElementById("location-btn").addEventListener("click", refrechAbfahrtenFromGeolocation);
     document.getElementById("station").addEventListener("keydown", (e) => { if (e.key === "Enter") refrechAbfahrten(); });
     document.getElementById("set-default-btn").addEventListener("click", function () {
         const defaultStation = document.getElementById("station").value;
@@ -78,4 +79,29 @@ async function holeNächsteAbfahrten(station = "Kriens Mattenhof") {
     } else {
         alert("Station nicht gefunden");
     }
+}
+
+async function refrechAbfahrtenFromGeolocation() {
+    await getNearbyStations();
+    await holeNächsteAbfahrten(station);
+    loadConections();
+}
+
+async function getNearbyStations() {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const url = `https://transport.opendata.ch/v1/locations?x=${lat}&y=${lon}&type=station`;
+        let response = await fetch(url);
+        const json = await response.json();
+
+        if (json.station != null) {
+            station = json.stations[0].name;
+        } else {
+            alert("Keine Station in der Nähe gefunden");
+        }
+    }, (err) => {
+        console.error("Geolocation error:", err.message);
+    });
 }
